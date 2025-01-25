@@ -1,0 +1,23 @@
+<div class="card mb-3 h-100">
+    <div class="row g-0 h-100">
+      <div class="col-md-4">
+        <img [src]="miProducto.image" [alt]="miProducto.image" class="img-fluid rounded-start h-100">
+      </div>
+      <div class="col-md-8 d-flex flex-column">
+        <div class="card-body flex-grow-1">
+          <h5 class="card-title">{{miProducto.name}}</h5>
+          <p class="card-text">{{miProducto.description}}</p>
+          <p class="card-text">{{miProducto.category}}</p>
+          <p class="card-text">{{miProducto.price}}</p>
+          <p class="card-text">{{miProducto._id}}</p>
+        </div>
+        <!--Botón de borrado-->
+        <div class="card-footer mt-auto">
+          <button class="btn btn-danger w-100" (click)="deleteProducto(miProducto)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+

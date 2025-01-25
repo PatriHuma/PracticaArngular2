@@ -1,0 +1,10 @@
+<div class="row">
+    @for (producto of arrProductos; track producto._id) {
+        <article class="col-12 col-md-6 col-sm-3">
+            <app-product-card [miProducto]="producto"></app-product-card>
+        </article>
+    }
+    @empty {
+        <h2>No hay datos, algo pasaaaa</h2>
+    }
+</div>

@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <form [formGroup]="productForm" (ngSubmit)="getDataForm()" class="card p-3 shadow">
+      <div class="mb-3">
+        <label for="_id" class="form-label">ID del Producto</label>
+        <input id="_id" type="text" formControlName="_id" class="form-control" placeholder="Introduce un ID">
+        @if(checkControl('_id', 'required')) {
+          <div class="invalid-feedback d-block">
+            El ID es obligatorio.
+          </div>
+        }
+        @if(checkControl('description', 'minlength')) {
+            <div class="invalid-feedback d-block">
+              La descripción debe tener al menos 15 caracteres.
+            </div>
+          }
+          <!-- validaciones varias como en el ejemplo de clase -->
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre del Producto</label>
+        <input id="name" type="text" formControlName="name" class="form-control" placeholder="Introduce un nombre">
+        @if(checkControl('name', 'required')) {
+          <div class="invalid-feedback d-block">
+            El nombre es obligatorio.
+          </div>
+        }
+        @if(checkControl('name', 'minlength')) {
+          <div class="invalid-feedback d-block">
+            El nombre debe tener al menos 3 caracteres.
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea id="description" formControlName="description" class="form-control" placeholder="Introduce una descripción"></textarea>
+        @if(checkControl('description', 'required')) {
+          <div class="invalid-feedback d-block">
+            La descripción es obligatoria.
+          </div>
+        }
+        @if(checkControl('description', 'minlength')) {
+          <div class="invalid-feedback d-block">
+            La descripción debe tener al menos 15 caracteres.
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Categoría</label>
+        <select id="category" formControlName="category" class="form-select">
+          <option value="">Elige una opción</option> <!-- no sé por qué no queda selecionada por defecto esta opción y sale 
+          en blanco, ene l otro form si queda solamente con "" ¿? -->
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>
+          <option value="niño">Niño</option>
+        </select>
+        @if(checkControl('category', 'required')) {
+          <div class="invalid-feedback d-block">
+            La categoría es obligatoria.
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Precio</label>
+        <input id="price" type="number" formControlName="price" class="form-control" placeholder="Introduce un precio">
+        @if(checkControl('price', 'required')) {
+          <div class="invalid-feedback d-block">
+            El precio es obligatorio.
+          </div>
+        }
+        @if(checkControl('price', 'min')) {
+          <div class="invalid-feedback d-block">
+            El precio debe ser un número positivo.
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">URL de la Imagen</label>
+        <input id="image" type="text" formControlName="image" class="form-control" placeholder="Introduce la URL de la imagen, no te libras">
+        @if(checkControl('image', 'required')) {
+          <div class="invalid-feedback d-block">
+            La URL de la imagen es obligatoria.
+          </div>
+        }
+      </div>
+      <div class="mb-3 form-check">
+        <input id="active" type="checkbox" formControlName="active" class="form-check-input">
+        <label for="active" class="form-check-label">Activo</label>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Agregar Producto</button>
+    </form>
+  </div>
+  

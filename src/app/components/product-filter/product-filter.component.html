@@ -1,0 +1,59 @@
+<section class="container mt-3">
+  <h2>Formulario del tipo Template</h2>
+  <hr>
+  <div>
+    <form #miFormulario="ngForm" (ngSubmit)="getDataForm(miFormulario)">
+      <div>
+        <label for="nombre" class="form-label mt-3">Nombre del Producto</label>
+        <input class="form-control" type="text" id="nombre" placeholder="Introduce el nombre" name="nombre" ngModel>
+      </div>
+
+      <div>
+        <label for="categoria" class="form-label mt-3">Categoría</label>
+        <select class="form-control" id="categoria" name="categoria" ngModel>
+          <option value="">Seleccione una categoría</option> <!-- Seleccionamos por defecto -->
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+          <option value="Niño">Niño</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="precio" class="form-label mt-3">Precio Máximo</label>
+        <input class="form-control" type="number" id="precio" placeholder="Introduce el precio máximo" name="precio" ngModel>
+      </div>
+
+      <input type="submit" value="Filtrar" class="btn btn-primary mt-3">
+      <button type="button" class="btn btn-secondary mt-3" (click)="resetForm(miFormulario)">Borrar</button>
+    </form>
+  </div>
+</section>
+
+<hr>
+<section class="container mt-3">
+  <h2>Lista de productos filtrados</h2>
+
+  <div *ngIf="productosFiltrados.length > 0; else noProducts"> <!-- si hay producto se mostrará en el Div, como un if normal -->
+    <div *ngFor="let producto of productosFiltrados" class="container mt-3 mb-5 card">
+       <p class="mt-3"><strong>Nombre: </strong> {{producto.name}}</p> <!--aqui iteremos y sacamos los detalles de cada uno que salga -->
+      <p><strong>Categoría: </strong> {{producto.category}}</p>
+      <p><strong>Precio: </strong> {{producto.price.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}}</p>
+      <p><strong>ID: </strong> {{producto._id}}</p>
+    </div>
+  </div>
+  <ng-template #noProducts>
+    <h3>No hay elementos</h3>
+  </ng-template>
+</section>
+
+<!-- Receta para crear correctamente... seguimos los pasos:
+
+1 - Importamos en el componente donde vamos a realizar el formulario, la libreria FormsModule. Exactamente igual 
+que cuando usamos Two Way Data Binding.
+2 - Creamos la maqueta del formulario en el html con la etiqueta form
+3 - A este form le colocamos un nombre o template, e igualamos ese nombre a ngForm de esta forma
+#nombreForm = "ngForm"
+4 - Crea un evento de tipo submit que en este caso se llama (ngSubmit)="funcionTs(nombreForm.value) o (nombreForm). 
+Ojooo funcionTS es un nombre generico y debemos pasar a esta funcion obligatoriamente el nombre del formulario creado en el paso anterior.
+5 - Todos los campos del formulario deben llevar un name="...." y un atributo ngModel.
+6 - La funcion devolvera un objeto json con cada uno de los campos del formulario. -->
